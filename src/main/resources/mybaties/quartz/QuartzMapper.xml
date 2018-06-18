@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.more.datasource.dao.QuartzMapper">
+    <select id="queryCount"  resultType="cn.more.datasource.vo.User">
+        SELECT id,name,age,sex FROM user
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectList" resultType="cn.more.datasource.vo.User">
+      SELECT id,name,age,sex FROM user
+    </select>
+
+    <insert id="insertUser" parameterType="cn.more.datasource.vo.User">
+        INSERT INTO `user` (`name`, `age`, `sex`)
+        VALUES
+            (#{name}, #{age}, #{sex});
+    </insert>
+
+    <update id="updateUserName">
+        UPDATE `user`
+        <set>
+            <if test="name != null and name != ''">
+                `name` = #{name},
+            </if>
+            <if test="age != null and age != ''">
+                `age` = #{age},
+            </if>
+            <if test="sex != null and sex != ''">
+                `sex` = #{sex},
+            </if>
+        </set>
+        WHERE
+            (`id` = #{id})
+    </update>
+
+</mapper>
